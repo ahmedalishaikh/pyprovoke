@@ -3,6 +3,12 @@ import invoke
 from provoke import provoke
 
 @invoke.task
-@provoke.depends(file="README.md")
+@provoke.run_if_exists(path="README.md")
 def test(ctx):
     print("I AM RUNNING")
+
+
+@invoke.task
+@provoke.run_if_changed(path="README.md")
+def test2(ctx):
+    print("I AM RUNNING x2")
